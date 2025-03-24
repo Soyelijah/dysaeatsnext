@@ -1,0 +1,6 @@
+En resumen, los comandos que debes ejecutar son:
+
+git status
+git add . (o git add nombre_del_archivo)
+git commit -m "Mensaje descriptivo de tus cambios"
+git push origin main
