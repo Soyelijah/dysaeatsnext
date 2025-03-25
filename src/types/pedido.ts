@@ -10,7 +10,7 @@ export interface Pedido {
 
   // Estado actual del pedido
   // Representa el estado del pedido, restringido a valores específicos: "pendiente", "en camino" o "entregado".
-  estado: "pendiente" | "en camino" | "entregado";
+  estado: "pendiente" | "en camino" | "entregado" | "cancelado";
 
   // Fecha y hora en que se creó el pedido
   // Marca temporal que indica cuándo se generó el pedido.
