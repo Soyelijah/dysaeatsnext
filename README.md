@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DysaEats - Aplicación Web
 
-## Getting Started
+Aplicación web para servicio de entrega de comida desarrollada con Next.js, React y TypeScript.
 
-First, run the development server:
+## Descripción
 
-```bash
+DysaEats es una plataforma completa para servicios de entrega de comida que conecta a clientes, repartidores y restaurantes. Esta aplicación web forma parte de un ecosistema que también incluye una aplicación móvil complementaria.
+
+## Características
+
+- **Autenticación de usuarios**: Inicio de sesión con Google y gestión de cuentas
+- **Gestión de pedidos**: Crear, visualizar y dar seguimiento a pedidos
+- **Seguimiento en tiempo real**: Visualización de la ubicación del repartidor en tiempo real
+- **Panel de repartidor**: Interfaz específica para la gestión de entregas
+- **Panel de administrador**: Control centralizado para administración del sistema
+- **Notificaciones**: Sistema de alertas para mantener informados a todos los usuarios
+
+## Tecnologías utilizadas
+
+- **Next.js 15.2.3**: Framework React con renderizado del lado del servidor
+- **React 19.0.0**: Biblioteca para construir interfaces de usuario
+- **TypeScript 5**: Superconjunto tipado de JavaScript
+- **Firebase 11.4.0**: Plataforma de desarrollo para aplicaciones web y móviles
+  - Authentication: Gestión de usuarios
+  - Firestore: Base de datos NoSQL
+  - Cloud Functions: Lógica de servidor serverless
+  - Cloud Messaging: Notificaciones push
+- **Tailwind CSS 4**: Framework CSS para diseño rápido
+- **Google Maps API**: Integración de mapas y servicios de ubicación
+
+## Requisitos previos
+
+- Node.js 18.x o superior
+- npm 8.x o superior
+- Cuenta de Firebase
+- Clave API de Google Maps
+
+## Instalación
+
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/dysaeatsnext.git
+   cd dysaeatsnext
+
+2. Instala las dependencias:
+
+npm install
+
+3. Configura las variables de entorno:
+
+- Crea un archivo .env.local en la raíz del proyecto
+- Copia el contenido de .env.example y completa con tus propias claves
+
+4. Inicia el servidor de desarrollo:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Abre http://localhost:3000 en tu navegador para ver la aplicación.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Estructura del proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+src/
+├── app/                # Rutas y páginas de la aplicación
+├── components/         # Componentes reutilizables
+├── firebase/           # Configuración y servicios de Firebase
+├── styles/             # Estilos globales
+├── types/              # Definiciones de tipos TypeScript
+└── utils/              # Utilidades y funciones auxiliares
 
-## Learn More
+Despliegue
+Para compilar el proyecto para producción:
 
-To learn more about Next.js, take a look at the following resources:
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Puedes desplegar la aplicación en plataformas como Vercel, Netlify o Firebase Hosting.
+Recursos adicionales
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Documentación de Next.js
+- Documentación de Firebase
+- Documentación de Google Maps Platform
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Aplicación móvil relacionada
+Este proyecto tiene una contraparte móvil desarrollada con Flutter. Puedes encontrarla en dysaeatsflutter.
+Licencia
+MIT

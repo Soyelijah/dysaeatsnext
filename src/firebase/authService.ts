@@ -1,6 +1,7 @@
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, User, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "./firebaseConfig"; // Configuración de Firebase
 import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore"; // Firestore para guardar datos adicionales
+import { getDoc } from "firebase/firestore"; // 👈 Asegúrate de importar esto arriba
 
 const auth = getAuth(firebaseApp); // Inicializa la autenticación
 const db = getFirestore(firebaseApp); // Inicializa Firestore
@@ -71,4 +72,39 @@ export const logoutUser = async () => {
  */
 export const getCurrentUser = (): User | null => {
   return auth.currentUser; // Devuelve el usuario actual
+};
+
+/**
+ * Inicia sesión con cuenta de Google.
+ * Crea usuario en Firestore si no existe.
+ */
+export const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    if (!user) return null;
+
+    // Verifica si el usuario ya existe en Firestore
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef); // ✅ Versión modular correcta
+
+    if (!userSnap.exists()) {
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email,
+        name: user.displayName ?? "",
+        photoURL: user.photoURL ?? "",
+        role: "cliente",
+        createdAt: serverTimestamp(),
+      });
+    }
+
+    return user;
+  } catch (error) {
+    console.error("❌ Error en login con Google:", error);
+    throw error;
+  }
 };
