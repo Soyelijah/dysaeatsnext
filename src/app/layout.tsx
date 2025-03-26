@@ -1,8 +1,12 @@
-import React from "react";
+'use client';
+
+import React, { useEffect } from "react";
 import { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+import { solicitarPermisoYObtenerToken, escucharMensajesEnPrimerPlano } from "@/firebase/notificationListener";
+import { metadata } from "./metadata"; // 👈 usa el archivo del paso anterior
 
 // Configuración de fuentes
 const geistSans = Geist({
@@ -16,18 +20,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
 });
-
-// Metadatos de la aplicación
-export const metadata: Metadata = {
-  title: "DysaEats - Servicio de Entrega de Comida",
-  description: "Plataforma de pedidos y entregas a domicilio",
-  keywords: ["comida", "delivery", "pedidos", "restaurantes", "entrega a domicilio"],
-  authors: [{ name: "DysaCompany" }],
-  viewport: "width=device-width, initial-scale=1",
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -43,6 +35,11 @@ interface RootLayoutProps {
  * - Pie de página
  */
 export default function RootLayout({ children }: RootLayoutProps) {
+  useEffect(() => {
+    solicitarPermisoYObtenerToken();
+    escucharMensajesEnPrimerPlano();
+  }, []);
+
   return (
     <html lang="es" className="h-full">
       <body
@@ -50,12 +47,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         {/* Barra de navegación */}
         <Navbar />
-        
+
         {/* Contenido principal */}
         <main className="flex-grow container mx-auto px-4 py-6 sm:px-6 lg:px-8">
           {children}
         </main>
-        
+
         {/* Pie de página */}
         <footer className="bg-gray-800 text-white py-6">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,7 +64,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   Tu plataforma de confianza para pedidos y entregas a domicilio
                 </p>
               </div>
-              
+
               {/* Columna 2 */}
               <div>
                 <h3 className="text-lg font-bold mb-4">Enlaces</h3>
@@ -89,7 +86,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   </li>
                 </ul>
               </div>
-              
+
               {/* Columna 3 */}
               <div>
                 <h3 className="text-lg font-bold mb-4">Contáctanos</h3>
@@ -109,7 +106,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </ul>
               </div>
             </div>
-            
+
             <div className="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400 text-sm">
               © {new Date().getFullYear()} DysaEats. Todos los derechos reservados.
             </div>

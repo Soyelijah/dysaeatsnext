@@ -26,4 +26,10 @@ export interface UserApp {
 
   // Dirección opcional del usuario
   direccion?: string; // Dirección física del usuario (opcional)
+
+  // Ubicación opcional del usuario (coordenadas geográficas)
+  ubicacion?: {
+    latitude: number;
+    longitude: number;
+  } | null;
 }
